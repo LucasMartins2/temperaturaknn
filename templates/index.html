@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsão de Temperatura</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Previsão de Temperatura</h1>
+        <form action="/predict" method="post">
+            <label for="precipitacao">Precipitação Total (mm):</label>
+            <input type="number" id="precipitacao" name="precipitacao" step="0.01" required><br>
+
+            <label for="pressao">Pressão Atmosférica (mB):</label>
+            <input type="number" id="pressao" name="pressao" step="0.01" required><br>
+
+            <label for="radiacao">Radiação Global (Kj/m²):</label>
+            <input type="number" id="radiacao" name="radiacao" step="0.01" required><br>
+
+            <label for="temp_orvalho">Temperatura do Ponto de Orvalho (°C):</label>
+            <input type="number" id="temp_orvalho" name="temp_orvalho" step="0.01" required><br>
+
+            <label for="umidade_max">Umidade Relativa Máxima (%):</label>
+            <input type="number" id="umidade_max" name="umidade_max" step="0.01" required><br>
+
+            <label for="umidade_min">Umidade Relativa Mínima (%):</label>
+            <input type="number" id="umidade_min" name="umidade_min" step="0.01" required><br>
+
+            <label for="umidade_rel">Umidade Relativa do Ar (%):</label>
+            <input type="number" id="umidade_rel" name="umidade_rel" step="0.01" required><br>
+
+            <label for="vento_rajada">Vento - Rajada Máxima (m/s):</label>
+            <input type="number" id="vento_rajada" name="vento_rajada" step="0.01" required><br>
+
+            <label for="vento_velocidade">Vento - Velocidade Horária (m/s):</label>
+            <input type="number" id="vento_velocidade" name="vento_velocidade" step="0.01" required><br>
+
+            <button type="submit">Prever</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            <h2>Resultado</h2>
+            <p>Temperatura: {{ prediction }}</p>
+            <p>Acurácia: {{ accuracy }}</p>
+            <p>Tempo de Execução: {{ execution_time }} segundos</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
